@@ -18,23 +18,36 @@ object rationals {
                                                   //> res2: String = 7/6
   
   val y = new Rational(2, 3)                      //> y  : Rational = 2/3
-  x.add(y)                                        //> res3: Rational = 7/6
+  x + y                                           //> res3: Rational = 7/6
   
   val a = new Rational(1, 3)                      //> a  : Rational = 1/3
   val b = new Rational(5, 7)                      //> b  : Rational = 5/7
   val c = new Rational(3, 2)                      //> c  : Rational = 3/2
   a.numer                                         //> res4: Int = 1
   a.denom                                         //> res5: Int = 3
-  a.sub(b).sub(c)                                 //> res6: Rational = -79/42
-  b.add(b)                                        //> res7: Rational = 10/7
-  a.less(b)                                       //> res8: Boolean = true
-  a.max(b)                                        //> res9: Rational = 5/7
+  a - b - c                                       //> res6: Rational = -79/42
+  b + b                                           //> res7: Rational = 10/7
+  a - b                                           //> res8: Rational = 8/-21
+  a max b                                         //> res9: Rational = 5/7
   //x.add(y).mul(z)
   
   //val strange = new Rational(1, 0)
   //strange.add(strange)
   
   new Rational(2)                                 //> res10: Rational = 2/1
+	
+	// precedence rules:
+	// all letters
+	// |
+	// ^
+	// &
+	// < >
+	// = !
+	// :
+	// + -
+	// * / %
+	// all other special chars
+	// ((a + b) ^? (c ?^ d)) less ((a ==> b) | c)
 	
 }
 
@@ -52,19 +65,19 @@ class Rational(x: Int, y: Int) {
 	def numer = x // / g
 	def denom = y // / g
 	
-	def add(that: Rational) =
+	def + (that: Rational) =
 		new Rational(
 			numer * that.denom + that.numer * denom,
 			denom * that.denom)
 	
-	def neg: Rational = new Rational(-numer, denom)
+	def unary_- : Rational = new Rational(-numer, denom)
 	
-	def sub(that: Rational) =
-		add(that.neg)
+	def - (that: Rational) =
+		this + -that
 	
-	def less(that: Rational) = numer * that.denom < that.numer * denom
+	def < (that: Rational) = numer * that.denom < that.numer * denom
 	
-	def max(that: Rational) = if (this.less(that)) that else this
+	def max(that: Rational) = if (this < that) that else this
 	
 	override def toString = {
 		val g = gcd(numer, denom)
