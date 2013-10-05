@@ -10,3 +10,4 @@ bin
 lib_managed/
 project/
 submission/
+.settings
