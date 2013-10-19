@@ -1,16 +1,16 @@
 package week3
 
-trait List[T] {
-	def isEmpty: Boolean
-	def head: T
-	def tail: List[T]
+trait MyList[T] {
+  def isEmpty: Boolean
+  def head: T
+  def tail: MyList[T]
 }
 
-class Cons[T](val head: T, val tail: List[T]) extends List[T] {
+class Cons[T](val head: T, val tail: MyList[T]) extends MyList[T] {
   def isEmpty: Boolean = false
 }
 
-class Nil[T] extends List[T] {
+class Nil[T] extends MyList[T] {
   def isEmpty: Boolean = true
   def head: Nothing = throw new NoSuchElementException("Nil.head")
   def tail: Nothing = throw new NoSuchElementException("Nil.tail")
