@@ -1,0 +1,13 @@
+target/
+*.class
+.metadata/
+.cache
+.classpath
+.project
+.worksheet
+bin
+.idea/
+lib_managed/
+project/
+submission/
+.settings
