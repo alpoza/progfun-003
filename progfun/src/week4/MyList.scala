@@ -19,7 +19,7 @@ object MyNil extends MyList[Nothing] {
 
 }
 
-object List {
+object MyList {
   def apply[T](x: T, y: T): MyList[T] = new Cons(x, new Cons(y, MyNil))
   def apply[T]() = MyNil
 }
